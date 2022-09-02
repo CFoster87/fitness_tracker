@@ -1,28 +1,25 @@
 import logo from "./logo.svg";
 import "./App.css";
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { Link, Route, Routes } from "react-router-dom";
 
 import { Activities, Home, Login, Navbar, Routines } from "./components";
 
 function App() {
+	const APIURL = "https://fitnesstrac-kr.herokuapp.com/api/";
+
 	return (
 		<div className='App'>
-			<header className='App-header'>
-				<img src={logo} className='App-logo' alt='logo' />
-				<p>
-					Edit <code>src/App.js</code> and save to reload.
-				</p>
-				<a
-					className='App-link'
-					href='https://reactjs.org'
-					target='_blank'
-					rel='noopener noreferrer'
-				>
-					Learn React
-				</a>
+			<header>
+				<h1>Hello World</h1>
 			</header>
+
+			<body>
+				<Routes>
+					<Route exact path='/' element={<Home apiurl={APIURL} />}></Route>
+				</Routes>
+			</body>
 		</div>
 	);
 }
