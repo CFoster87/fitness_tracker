@@ -1,54 +1,45 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Container } from "@mui/system";
 import { CssBaseline, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const APIURL = "https://fitnesstrac-kr.herokuapp.com/api";
 
-function Login({ setToken }) {
-	// login
-	async function userLogin(username, password) {
-		return fetch(`${APIURL}/users/login`, {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				user: {
-					username: username,
-					password: password,
-				},
-			}),
-		})
-			.then((response) => response.json())
-			.then((result) => {
-				console.log(result);
-				return result.data.token;
-			})
-			.catch(console.error);
-	}
-
-	const history = useNavigate();
+function Register({ setToken }) {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
+	// const [token, setToken] = useState("");
+	const history = useNavigate();
+
+	const handleRegister = async (username, password) => {
+		try {
+			const response = await fetch(`${APIURL}/users/register`, {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					user: { username: username, password: password },
+				}),
+			});
+			const result = await response.json();
+			return result;
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		try {
-			const token = await userLogin(username, password);
-			if (token) {
-				sessionStorage.setItem("token", JSON.stringify(token));
-				setToken(token);
-				history("/Homepage");
-				alert("You are logged in!");
-			} else {
-				alert("Username or passowrd are incorrect");
-			}
-		} catch (error) {
-			alert(error.message);
-		}
+		const result = await handleRegister(username, password);
+		const token = result.data.token;
+		console.log("token", token);
+		// console.log("setToken", setToken);
+		sessionStorage.setItem("token", JSON.stringify(token));
+		// setToken(token);
+		history("/Homepage");
+		alert("You have created a new user!");
 	};
 	return (
 		<Container component='main' maxWidth='xs'>
@@ -62,14 +53,14 @@ function Login({ setToken }) {
 				}}
 			>
 				<Typography component='h1' variant='h4'>
-					Login
+					Create Account
 				</Typography>
 				<Box component='form' onSubmit={handleSubmit}>
 					<TextField
 						margin='normal'
 						required
 						fullWidth
-						id='outlined'
+						id='outlined-required'
 						label='Username'
 						value={username}
 						onChange={(e) => setUsername(e.target.value)}
@@ -90,7 +81,7 @@ function Login({ setToken }) {
 						variant='contained'
 						sx={{ mt: 3, mb: 2 }}
 					>
-						Login
+						Register
 					</Button>
 				</Box>
 			</Box>
@@ -98,4 +89,4 @@ function Login({ setToken }) {
 	);
 }
 
-export default Login;
+export default Register;
