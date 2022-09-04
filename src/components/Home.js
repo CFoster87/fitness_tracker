@@ -10,7 +10,6 @@ import { default as MyRoutines } from "./MyRoutines";
 
 const Home = ({ isLoggedIn, setIsLoggedIn, token, setToken }) => {
 	const [user, setUser] = useState("");
-	console.log("token from Home ", token);
 	// FOR UNREGISTERED VISITOR
 	// show signin/signup
 	// see tabbed navigation for Routines and Activities
