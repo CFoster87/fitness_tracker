@@ -8,10 +8,9 @@ import { default as MyRoutines } from "./MyRoutines";
 
 //import login/signup, Routines and Activities
 
-const Home = ({ APIURL, isLoggedIn, setIsLoggedIn }) => {
-	const [token, setToken] = useState("");
+const Home = ({ isLoggedIn, setIsLoggedIn, token, setToken }) => {
 	const [user, setUser] = useState("");
-	console.log("isLoggedIn from Home ", isLoggedIn);
+	console.log("token from Home ", token);
 	// FOR UNREGISTERED VISITOR
 	// show signin/signup
 	// see tabbed navigation for Routines and Activities

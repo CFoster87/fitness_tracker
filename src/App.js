@@ -17,6 +17,7 @@ function App() {
 	const APIURL = "https://fitnesstrac-kr.herokuapp.com/api/";
 	const [isLoggedIn, setIsLoggedIn] = useState("");
 	const [token, setToken] = useState("");
+	console.log("token from app.js ", token)
 
 	return (
 		<div className='App'>
@@ -31,6 +32,8 @@ function App() {
 							apiurl={APIURL}
 							isLoggedIn={isLoggedIn}
 							setIsLoggedIn={setIsLoggedIn}
+							setToken={setToken}
+							token={token}
 						/>
 					}
 				></Route>
@@ -40,7 +43,7 @@ function App() {
 				<Route
 					exact
 					path='/activities'
-					element={<Activities isLoggedIn={isLoggedIn} />}
+					element={<Activities isLoggedIn={isLoggedIn} token={token} />}
 				>
 					Activities
 				</Route>

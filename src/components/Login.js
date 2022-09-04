@@ -35,6 +35,7 @@ function Login({ setToken, setIsLoggedIn }) {
 		e.preventDefault();
 		try {
 			const token = await userLogin(username, password);
+			console.log("token from login ", token)
 			if (token) {
 				sessionStorage.setItem("token", JSON.stringify(token));
 				setToken(token);
