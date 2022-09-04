@@ -4,11 +4,19 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { Link, Route, Routes } from "react-router-dom";
 
-import { Activities, Home, Login, Navbar, Routines } from "./components";
+import {
+	Activities,
+	Home,
+	Register,
+	Login,
+	Navbar,
+	Routines,
+} from "./components";
 
 function App() {
 	const APIURL = "https://fitnesstrac-kr.herokuapp.com/api/";
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const [isLoggedIn, setIsLoggedIn] = useState("");
+	const [token, setToken] = useState("");
 
 	return (
 		<div className='App'>
@@ -25,18 +33,24 @@ function App() {
 							setIsLoggedIn={setIsLoggedIn}
 						/>
 					}
-				>
-					<Route exact path='/routines' element={<Routines />}>
-						Routines
-					</Route>
-					<Route
-						exact
-						path='/activities'
-						element={<Activities isLoggedIn={isLoggedIn} />}
-					>
-						Activities
-					</Route>
+				></Route>
+				<Route exact path='/routines' element={<Routines />}>
+					Routines
 				</Route>
+				<Route
+					exact
+					path='/activities'
+					element={<Activities isLoggedIn={isLoggedIn} />}
+				>
+					Activities
+				</Route>
+				<Route
+					exact
+					path='/register'
+					element={
+						<Register setToken={setToken} setIsLoggedIn={setIsLoggedIn} />
+					}
+				></Route>
 			</Routes>
 		</div>
 	);

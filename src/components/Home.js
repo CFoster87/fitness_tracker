@@ -11,6 +11,7 @@ import { default as MyRoutines } from "./MyRoutines";
 const Home = ({ APIURL, isLoggedIn, setIsLoggedIn }) => {
 	const [token, setToken] = useState("");
 	const [user, setUser] = useState("");
+	console.log("isLoggedIn from Home ", isLoggedIn);
 	// FOR UNREGISTERED VISITOR
 	// show signin/signup
 	// see tabbed navigation for Routines and Activities
@@ -31,22 +32,9 @@ const Home = ({ APIURL, isLoggedIn, setIsLoggedIn }) => {
 		return (
 			<div>
 				<Login setToken={setToken} setIsLoggedIn={setIsLoggedIn} />
-				<Register setToken={setToken} setIsLoggedIn={setIsLoggedIn} />
+				<Link to='/register'>Register Here</Link>
 				<Link to='/routines'>Routines</Link>
 				<Link to='/activities'>Activites</Link>
-
-				<Routes>
-					<Route exact path='/routines' element={<Routines />}>
-						Routines
-					</Route>
-					<Route
-						exact
-						path='/activities'
-						element={<Activities isLoggedIn={isLoggedIn} />}
-					>
-						Activities
-					</Route>
-				</Routes>
 				<Outlet />
 			</div>
 		);

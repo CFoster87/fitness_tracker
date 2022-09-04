@@ -17,16 +17,13 @@ function Login({ setToken, setIsLoggedIn }) {
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({
-				user: {
-					username: username,
-					password: password,
-				},
+				username: username,
+				password: password,
 			}),
 		})
 			.then((response) => response.json())
 			.then((result) => {
-				console.log(result);
-				return result.data.token;
+				return result.token;
 			})
 			.catch(console.error);
 	}
@@ -42,7 +39,7 @@ function Login({ setToken, setIsLoggedIn }) {
 				sessionStorage.setItem("token", JSON.stringify(token));
 				setToken(token);
 				setIsLoggedIn(true);
-				history("/Homepage");
+				history("/");
 				alert("You are logged in!");
 			} else {
 				alert("Username or passowrd are incorrect");
