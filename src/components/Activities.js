@@ -48,7 +48,7 @@ const Activities = (props) => {
 			.then((result) => {
 				return result;
 			})
-			.catch(console.error);
+			.catch(alert("That activity already exists"));
 	};
 
 	const postStyle = {

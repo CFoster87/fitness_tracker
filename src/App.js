@@ -17,7 +17,6 @@ function App() {
 	const APIURL = "https://fitnesstrac-kr.herokuapp.com/api/";
 	const [isLoggedIn, setIsLoggedIn] = useState("");
 	const [token, setToken] = useState("");
-	console.log("token from app.js ", token)
 
 	return (
 		<div className='App'>
