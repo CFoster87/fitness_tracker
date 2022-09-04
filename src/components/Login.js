@@ -8,7 +8,7 @@ import { CssBaseline, Typography } from "@mui/material";
 
 const APIURL = "https://fitnesstrac-kr.herokuapp.com/api";
 
-function Login({ setToken }) {
+function Login({ setToken, setIsLoggedIn }) {
 	// login
 	async function userLogin(username, password) {
 		return fetch(`${APIURL}/users/login`, {
@@ -41,6 +41,7 @@ function Login({ setToken }) {
 			if (token) {
 				sessionStorage.setItem("token", JSON.stringify(token));
 				setToken(token);
+				setIsLoggedIn(true);
 				history("/Homepage");
 				alert("You are logged in!");
 			} else {

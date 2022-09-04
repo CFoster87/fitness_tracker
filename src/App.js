@@ -8,16 +8,36 @@ import { Activities, Home, Login, Navbar, Routines } from "./components";
 
 function App() {
 	const APIURL = "https://fitnesstrac-kr.herokuapp.com/api/";
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 	return (
 		<div className='App'>
 			<header></header>
 
-			<body>
-				<Routes>
-					<Route exact path='/' element={<Home apiurl={APIURL} />}></Route>
-				</Routes>
-			</body>
+			<Routes>
+				<Route
+					exact
+					path='/'
+					element={
+						<Home
+							apiurl={APIURL}
+							isLoggedIn={isLoggedIn}
+							setIsLoggedIn={setIsLoggedIn}
+						/>
+					}
+				>
+					<Route exact path='/routines' element={<Routines />}>
+						Routines
+					</Route>
+					<Route
+						exact
+						path='/activities'
+						element={<Activities isLoggedIn={isLoggedIn} />}
+					>
+						Activities
+					</Route>
+				</Route>
+			</Routes>
 		</div>
 	);
 }

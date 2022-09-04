@@ -8,37 +8,44 @@ import { useNavigate } from "react-router-dom";
 
 const APIURL = "https://fitnesstrac-kr.herokuapp.com/api";
 
-function Register({ setToken }) {
+function Register({ setToken, setIsLoggedIn }) {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
-	// const [token, setToken] = useState("");
 	const history = useNavigate();
 
-	const handleRegister = async (username, password) => {
+	async function handleRegister(username, password) {
 		try {
-			const response = await fetch(`${APIURL}/users/register`, {
+			return await fetch(`${APIURL}/users/register`, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({
-					user: { username: username, password: password },
+					user: {
+						username: username,
+						password: password,
+					},
 				}),
-			});
-			const result = await response.json();
-			return result;
+			})
+				.then((response) => response.json())
+				.then((result) => {
+					console.log("result from handleRegister", result);
+					return result;
+				});
 		} catch (error) {
 			console.log(error);
 		}
-	};
+	}
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const result = await handleRegister(username, password);
+		console.log("result", result);
 		const token = result.data.token;
 		console.log("token", token);
-		// console.log("setToken", setToken);
+		console.log("setToken", setToken);
 		sessionStorage.setItem("token", JSON.stringify(token));
-		// setToken(token);
-		history("/Homepage");
+		setToken(token);
+		setIsLoggedIn(true);
+		history("/");
 		alert("You have created a new user!");
 	};
 	return (
