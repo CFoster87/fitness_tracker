@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { APIURL } from '../index';
 
-const Routines = () => {
+const Routines = ({token}) => {
 	// FOR ANY USER
 	// see a list of public routines including (routine name, goal and creator's username), a list of activities for the routine (including name, descripiton, duration and/or count)
 	// FOR REGISTERED USER
@@ -27,7 +28,7 @@ const Routines = () => {
 		};
 
 		fetchRoutines();
-	}, []);
+	}, [token]);
 
 	const postStyle = {
 		span: {
