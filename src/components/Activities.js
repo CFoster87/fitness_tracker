@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
+import {Link} from "react-router-dom"
 
 const Activities = (props) => {
 	const {isLoggedIn, token} = props
-	// FOR UNREGISTERED USERS
-	//see a list of all activities which have been created.
-	// FOR REGISTERED USER
-	// be shown a form to create a new activity by name and description.
-	// be shown an error if that activity already exists.
+
 	// STRETCH GOALS
 	// as ANY USER be able to click on an activity name and see a list of public routines which feature it.
 	// as a REGISTERED USER be able to edit an existing activity and update the description regardless of who owns it.
@@ -48,7 +45,7 @@ const Activities = (props) => {
 			.then((result) => {
 				return result;
 			})
-			.catch(alert("That activity already exists"));
+			.catch(console.error);
 	};
 
 	const postStyle = {
@@ -79,6 +76,10 @@ const Activities = (props) => {
 	if (isLoggedIn) {
 		return (
 			<div style={postStyle.body}>
+							<div>
+				<Link to='/'>Home</Link>
+
+			</div>
 				<div>
 					<h1>Add New Activity</h1>
 					<form onSubmit={createActivity}>

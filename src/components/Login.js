@@ -9,7 +9,6 @@ import { CssBaseline, Typography } from "@mui/material";
 const APIURL = "https://fitnesstrac-kr.herokuapp.com/api";
 
 function Login({ setToken, setIsLoggedIn }) {
-	// login
 	async function userLogin(username, password) {
 		return fetch(`${APIURL}/users/login`, {
 			method: "POST",

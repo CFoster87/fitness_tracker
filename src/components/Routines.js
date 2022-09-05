@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { APIURL } from '../index';
+import {Link} from "react-router-dom"
 
 const Routines = ({token}) => {
 	// FOR ANY USER
@@ -58,6 +58,12 @@ const Routines = ({token}) => {
 	return (
 		<body style={postStyle.body}>
 			<h1 style={postStyle.title}> Routines </h1>
+			<div>
+				<Link to='/'>Home</Link>
+
+			</div>
+
+		
 
 			{routines.map((routine) => {
 				return (
